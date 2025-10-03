@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Cumpleaños</title>
+  </head>
+  <body style="margin:0; padding:0; font-family: 'Segoe UI', sans-serif; background-color:#f3e5f5;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+      <tr>
+        <td align="center">
+
+          <!-- Tarjeta -->
+          <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff; border-radius:20px; overflow:hidden; border:2px solid #6a1b9a; box-shadow:0 4px 12px rgba(0,0,0,0.1);">
+            
+            <!-- Encabezado -->
+            <tr>
+              <td align="center" style="background-color:#6a1b9a; padding:25px;">
+                <h1 style="margin:0; font-size:26px; color:#fdd835; font-weight:bold;">
+                  {{.Titulo}}
+                </h1>
+              </td>
+            </tr>
+
+            <!-- Contenido -->
+            <tr>
+              <td align="center" style="padding:35px; color:#333333;">
+                <h2 style="color:#6a1b9a; margin:0; font-size:22px; font-weight:bold;">
+                  ✨ ¡Feliz Cumpleaños {{.Nombre}} ! 🎂
+                </h2>
+                <p style="font-size:16px; line-height:24px; color:#555; margin:20px 0;">
+                  {{.Descripcion}}
+                </p>
+                <p style="background-color:#fdd835; color:#6a1b9a; padding:12px 30px; border-radius:30px; display:inline-block; font-weight:bold; font-size:16px; margin:20px 0;">
+                  🎈 {{.Edad}} años 🎈
+                </p>
+              </td>
+            </tr>
+
+            <!-- Pie -->
+            <tr>
+              <td align="center" style="background-color:#4a148c; padding:20px; color:#ffffff; font-size:14px;">
+                🌟 Con aprecio, tu equipo corporativo <b>Sistemas GyG</b>
+              </td>
+            </tr>
+
+          </table>
+          <!-- Fin Tarjeta -->
+
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>

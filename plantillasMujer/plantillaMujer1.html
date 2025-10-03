@@ -1,0 +1,59 @@
+  <!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <title>Cumpleaños</title>
+  </head>
+  <body style="margin:0; padding:0; font-family: Arial, sans-serif; background-color:#f8faff;">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+      <tr>
+        <td align="center">
+
+          <!-- Tarjeta -->
+          <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff; border-radius:15px; overflow:hidden; border:2px solid #1e3a8a;">
+            
+            <!-- Encabezado con flores -->
+            <tr>
+              <td align="center" style="background-color:#1e3a8a; padding:25px;">
+                <h1 style="margin:0; font-size:26px; color:#ffffff; font-weight:bold;">
+                  {{.Titulo}}
+                </h1>
+              </td>
+            </tr>
+
+            <!-- Contenido -->
+            <tr>
+              <td align="center" style="padding:30px; color:#333333;">
+                <h2 style="color:#c2185b; margin:0; font-size:22px; font-weight:bold;">
+                  🎉 ¡Feliz Cumpleaños {{.Nombre}} ! 🎂
+                </h2>
+                <p style="font-size:16px; line-height:24px; color:#555; margin:20px 0;">
+                  {{.Descripcion}}
+                </p>
+                <p style="background-color:#fde2e4; color:#ad1457; padding:12px 25px; border-radius:25px; display:inline-block; font-weight:bold; font-size:16px; margin:15px 0;">
+                  🎈 {{.Edad}} años 🎈
+                </p>
+              </td>
+            </tr>
+
+            <!-- Imagen decorativa central -->
+            <tr>
+              <td align="center" style="padding:15px;">
+              </td>
+            </tr>
+
+            <!-- Pie -->
+            <tr>
+              <td align="center" style="background-color:#1e3a8a; padding:18px; color:#ffffff; font-size:14px;">
+                🌸 Con aprecio, tu equipo corporativo GyG 🌸
+              </td>
+            </tr>
+
+          </table>
+          <!-- Fin Tarjeta -->
+
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
