@@ -56,27 +56,6 @@ func CorreosSinRegistrar(
 	return nil
 }
 
-// func ConstruirCorreoCumpleaños(Informacion__funcionarios map[int64]structs.DatosFuncionarios) {
-// 	for _, inf := range Informacion__funcionarios{
-// 		datos__correo := mail.NewMessage()
-// 		datos__correo.SetHeader("From", "gygculpleanos@gmail.com")
-// 		datos__correo.SetHeader("To", inf.CorreoFuncionario)
-// 		// Llamado funcion correos sin registrar
-// 		CorreosSinRegistrar(Informacion__funcionarios)
-// 		datos__correo.SetHeader("Subject", "RE: Feliz cumpleaños"+" "+inf.NombreFuncionario)
-// 		// Contenido principal del mensaje
-// 		datos__correo.SetBody("text/html", informacion__plantilla.String())
-// 		// dialer SMTP configurado para poder enviar correos electronicos
-// 		datos := mail.NewDialer("smtp.gmail.com", 587, "gygculpleanos@gmail.com", "hzit rqsa dpwd vebc")
-// 		// Envio correo con la informacion correspondiente
-// 		if err := datos.DialAndSend(datos__correo); err != nil {
-// 			fmt.Printf("error enviando correo:%v", err)
-// 		} else {
-// 			fmt.Println("correo enviado satisfactoriamente")
-// 		}
-// 	}
-// }
-
 func EnviarCalendarioCumpleañosMes(
 	Informacion__funcionario map[int64]structs.DatosFuncionarios) {
 	var Meses__año = map[time.Month]string{
