@@ -6,13 +6,18 @@ import (
 	"modulo/funcionesArchivos"
 	"modulo/funcionesArreglos"
 	"os"
+	"time"
 
 	"github.com/kardianos/service"
+	"github.com/robfig/cron/v3"
 )
 
 func main() {
+	loc, _ := time.LoadLocation("America/Bogota")            // Zona horaria para fechas y horas
+	horario__establecido := cron.New(cron.WithLocation(loc)) // Programacion tareas automaticas en un horario establecido
+
 	// Ejecucion funcion lectura archivo funcionariosGyG
-	rows__funcionarios, err := funcionesArchivos.LeerArchivoFuncionariosgyg("../cumpleañosgyg/archivo/funcionariosgyg.xlsx")
+	rows__funcionarios, rows__aniversarios, err := funcionesArchivos.LeerArchivoFuncionariosgyg("../cumpleañosgyg/archivo/funcionariosgyg.xlsx")
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -24,12 +29,18 @@ func main() {
 		Descripcion__trabajador,
 		Informacion__funcionarios := funcionesArchivos.ProcesarDatosFuncionarios(rows__funcionarios)
 	fmt.Println(Cedula__funcionarios, Edad__trabajador, Correo__trabajador, Descripcion__trabajador, Apellido__funcionario, FechaDe__nacimiento, Nombre__Funcionarios, Genero__funcionario, Lugar__trabajo)
+	// Ejecucion funcion procesar datos funcionarios
+	funcionesArchivos.ProcesarDatosAniversarios(rows__aniversarios)
 	// Ejecucion funcion cumpleaños actuales
 	funcionesArreglos.CumpleañosActuales(
 		Nombre__Funcionarios,
 		Informacion__funcionarios)
 	// Ejecucion funciones Envio de plantillas
-	funcionesArreglos.EnviarCalendarioCumpleañosMes(Informacion__funcionarios)
+	horario__establecido.AddFunc("0 8 1 * *", func() { // envio de plantilla 01 de cada mes, 8 am
+		informacion := Informacion__funcionarios
+		funcionesArreglos.EnviarCalendarioCumpleañosMes(informacion)
+	})
+	horario__establecido.Start()
 	funcionesArreglos.NotificarCumpleañosFuncionario(
 		Nombre__Funcionarios, Apellido__funcionario,
 		Descripcion__trabajador, Genero__funcionario,
