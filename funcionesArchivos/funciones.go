@@ -14,19 +14,26 @@ import (
 	"github.com/xuri/excelize/v2"
 )
 
-func LeerArchivoFuncionariosgyg(Nombre__archivo string) ([][]string, error) {
+func LeerArchivoFuncionariosgyg(Nombre__archivo string) ([][]string, [][]string, error) {
 	archivo__funcionrios, err := excelize.OpenFile(Nombre__archivo)
 	if err != nil {
-		return nil, fmt.Errorf("error al abrir el archivo de funcionarios: %v", err)
+		return nil, nil, fmt.Errorf("error al abrir el archivo de funcionarios: %v", err)
 	}
 	defer archivo__funcionrios.Close()
 
 	nombreHoja__Funcionarios := archivo__funcionrios.GetSheetName(0)
+	nombreHoja__aniversarios := archivo__funcionrios.GetSheetName(1)
 	rows__funcionarios, err := archivo__funcionrios.GetRows(nombreHoja__Funcionarios)
 	if err != nil {
-		return nil, fmt.Errorf("error al leer las filas de funcionariosgyg: %v", err)
+		return nil, nil, fmt.Errorf("error al leer las filas de funcionariosgyg: %v", err)
 	}
-	return rows__funcionarios, nil
+	// lectura hoja aniversarios
+	rows__aniversarios, err := archivo__funcionrios.GetRows(nombreHoja__aniversarios)
+	if err != nil {
+		return nil, nil, fmt.Errorf("error al leer las filas de aniversarios: %v", err)
+	}
+
+	return rows__funcionarios, rows__aniversarios, nil
 }
 
 func ProcesarDatosFuncionarios(rows__funcionarios [][]string) (
@@ -86,6 +93,32 @@ func ProcesarDatosFuncionarios(rows__funcionarios [][]string) (
 	return Cedula__funcionarios, FechaDe__nacimiento,
 		Nombre__funcionarios, Apellido__funcionario, Genero__funcionario, Lugar__trabajo,
 		Edad__trabajador, Correo__trabajador, Descripcion__trabajador, Informacion__funcionarios
+}
+
+func ProcesarDatosAniversarios(rows__aniversarios [][]string) {
+	cedula__aniversarios := make(map[int64]struct{})
+	fecha__ingreso := make(map[int64]time.Time)
+	nombre__anivesario := make(map[int64]string)
+	años__cumplidos := make(map[int64]string)
+
+	for i, rows := range rows__aniversarios {
+		if i > 1 {
+			doc, err := funcionesArreglos.NormalicarCedulas(rows[0])
+			if err != nil {
+				log.Fatal(errors.New("error al normalizar cedula %v: %v"), doc, err)
+			}
+			cedula__aniversarios[doc] = struct{}{}
+
+			fecha, err := funcionesArreglos.ConvertirFechas(rows[1])
+			if err != nil {
+				log.Fatal(errors.New("error la convertir fecha %v: %v"), fecha, err)
+			}
+			fecha__ingreso[doc] = fecha
+
+			nombre__anivesario[doc] = rows[2]
+			años__cumplidos[doc] = rows[3]
+		}
+	}
 }
 
 func NotificaCambiosArchivoPrincipal() {
