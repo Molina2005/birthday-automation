@@ -57,7 +57,7 @@ func CorreosSinRegistrar(
 }
 
 func EnviarCalendarioCumpleañosMes(
-	Informacion__funcionario map[int64]structs.DatosFuncionarios) {
+	Informacion__funcionarios map[int64]structs.DatosFuncionarios) {
 	var Meses__año = map[time.Month]string{
 		time.January: "enero", time.February: "febrero",
 		time.March: "marzo", time.April: "abril",
@@ -71,7 +71,7 @@ func EnviarCalendarioCumpleañosMes(
 	var diasOrdenados []structs.PlantillaCumpleanos
 	// guarda toda la informacion para poder usarla en la plantilla
 	var lista__funcionarios []string
-	for _, inf := range Informacion__funcionario {
+	for _, inf := range Informacion__funcionarios {
 		mes__titulo = Meses__año[inf.FechaNacimiento.Month()]
 		dia__cumpleaños := inf.FechaNacimiento.Day()
 		descripcion__plantilla := strconv.Itoa(inf.FechaNacimiento.Day()) + " " +
@@ -165,7 +165,7 @@ func NotificarCumpleañosFuncionario(
 		// cargue de informacion a correos
 		datos__correo := mail.NewMessage()
 		datos__correo.SetHeader("From", "gygculpleanos@gmail.com")
-		datos__correo.SetHeader("To", Correo__trabajador[doc]) // Añadir a Cristian y Deysy como comprobante 
+		datos__correo.SetHeader("To", Correo__trabajador[doc]) // Añadir a Cristian y Deysy como comprobante
 		// Llamado funcion correos sin registrar
 		CorreosSinRegistrar(Informacion__funcionarios)
 		datos__correo.SetHeader("Subject", "RE: Feliz cumpleaños"+" "+Nombre__funcionarios[doc])
