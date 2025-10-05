@@ -1,7 +1,6 @@
 package structs
 
 import (
-	// "text/template"
 	"time"
 )
 
