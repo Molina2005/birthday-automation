@@ -149,6 +149,14 @@ func NotificarCumpleañosFuncionario(
 			if tmlp, err = template.ParseGlob("plantillasMujer/*.html"); err != nil {
 				fmt.Printf("error al analizar archivos")
 			}
+			// Se obtienen todas las plantillas dentro del archivo
+			for _, savePlantillas := range tmlp.Templates() {
+				savePlantillas.Name()
+				ListaPlantillas = append(ListaPlantillas, savePlantillas)
+			}
+			// plantilla aleatorias
+			indice := rand.Intn(len(ListaPlantillas))
+			plantillaElegida = ListaPlantillas[indice]
 		}
 		// datos a enviar a plantilla
 		info__funcionario := structs.PlantillaCumpleanos{
@@ -178,6 +186,92 @@ func NotificarCumpleañosFuncionario(
 			fmt.Printf("error enviando correo:%v", err)
 		} else {
 			fmt.Println("correo enviado satisfactoriamente")
+		}
+	}
+}
+
+func AñosEnEmpresa(fecha__ingreso time.Time) int {
+	fecha__actual := time.Now()
+	años := fecha__actual.Year() - fecha__ingreso.Year()
+
+	if fecha__actual.Month() < fecha__ingreso.Month() ||
+		fecha__actual.Month() == fecha__ingreso.Month() && fecha__actual.Day() < fecha__ingreso.Day() {
+		años--
+	}
+	return años
+}
+
+func NotificarAniversarioFuncionario(
+	Informacion__aniversarios map[int64]structs.DatosAniversarios,
+) {
+	for _, inf := range Informacion__aniversarios {
+		fecha__actual := time.Now()
+
+		if fecha__actual.Month() == inf.FechaIngreso.Month() &&
+			fecha__actual.Day() == inf.FechaIngreso.Day() {
+
+			// Variables globales para usar posteriormente
+			var tmlpAniversarios *template.Template
+			var err error
+			var ListaPlantillasAniverarios []*template.Template
+			var plantillaElegidaAniversarios *template.Template
+
+			// segun genero, envia plantilla correspondiente
+			switch inf.GeneroAniversarios {
+			case "MASCULINO":
+				if tmlpAniversarios, err = template.ParseGlob("plantillasHombreAniversarios/*.html"); err != nil {
+					fmt.Printf("error al analizar archivos")
+				}
+				// Se obtienen todas las plantillas dentro del archivo
+				for _, savePlantillas := range tmlpAniversarios.Templates() {
+					savePlantillas.Name()
+					ListaPlantillasAniverarios = append(ListaPlantillasAniverarios, savePlantillas)
+				}
+				// plantilla aleatorias
+				indice := rand.Intn(len(ListaPlantillasAniverarios))
+				plantillaElegidaAniversarios = ListaPlantillasAniverarios[indice]
+			case "FEMENINO":
+				if tmlpAniversarios, err = template.ParseGlob("plantillasMujerAniversarios/*.html"); err != nil {
+					fmt.Printf("error al analizar archivos")
+				}
+				// Se obtienen todas las plantillas dentro del archivo
+				for _, savePlantillas := range tmlpAniversarios.Templates() {
+					savePlantillas.Name()
+					ListaPlantillasAniverarios = append(ListaPlantillasAniverarios, savePlantillas)
+				}
+				// plantilla aleatorias
+				indice := rand.Intn(len(ListaPlantillasAniverarios))
+				plantillaElegidaAniversarios = ListaPlantillasAniverarios[indice]
+			}
+			// datos a enviar a plantilla
+			info__aniversario := structs.PlantillaAniversarios{
+				Titulo:      "Feliz aniversario",
+				Nombre:      inf.NombreAniversario,
+				Descripcion: inf.Descripcion,
+				Tiempo:      AñosEnEmpresa(inf.FechaIngreso),
+			}
+
+			var informacion__plantilla__aniversarios bytes.Buffer
+			// ejecucion de plantilla
+			if err := tmlpAniversarios.ExecuteTemplate(&informacion__plantilla__aniversarios, plantillaElegidaAniversarios.Name(), info__aniversario); err != nil {
+				fmt.Printf("error al ejecutar la plantilla:%v", err)
+			}
+
+			// cargue de informacion a correos
+			datos__correo := mail.NewMessage()
+			datos__correo.SetHeader("From", "gygculpleanos@gmail.com")
+			datos__correo.SetHeader("To", inf.CorreoAniversario)
+			datos__correo.SetHeader("Subject", "RE: Feliz aniversario"+ " " + inf.NombreAniversario + "" + 
+			inf.ApellidoAniversario)
+			datos__correo.SetBody("text/html", informacion__plantilla__aniversarios.String())
+			// dialer SMTP configurado para poder enviar correos electronicos
+			datos := mail.NewDialer("smtp.gmail.com", 587, "gygculpleanos@gmail.com", "hzit rqsa dpwd vebc")
+			// Envio correo con la informacion correspondiente
+			if err := datos.DialAndSend(datos__correo); err != nil {
+				fmt.Printf("error enviando correo:%v", err)
+			} else {
+				fmt.Println("correo enviado satisfactoriamente")
+			}
 		}
 	}
 }
