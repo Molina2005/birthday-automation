@@ -5,14 +5,21 @@ import (
 )
 
 type PlantillaCumpleanos struct {
-	Titulo           string
-	Fecha            int
-	Nombre           string
-	Apellido         string
-	Descripcion      string
-	Edad             int
-	Funcionarios     []string
-	Dias             int
+	Titulo       string
+	Fecha        int
+	Nombre       string
+	Apellido     string
+	Descripcion  string
+	Edad         int
+	Funcionarios []string
+	Dias         int
+}
+
+type PlantillaAniversarios struct {
+	Titulo      string
+	Nombre      string
+	Tiempo      int
+	Descripcion string
 }
 
 type DatosFuncionarios struct {
@@ -20,4 +27,13 @@ type DatosFuncionarios struct {
 	NombreFuncionario   string
 	ApellidoFuncionario string
 	CorreoFuncionario   string
+}
+
+type DatosAniversarios struct {
+	FechaIngreso        time.Time
+	NombreAniversario   string
+	ApellidoAniversario string
+	GeneroAniversarios  string
+	CorreoAniversario   string
+	Descripcion         string
 }
