@@ -30,7 +30,7 @@ func main() {
 		Informacion__funcionarios := funcionesArchivos.ProcesarDatosFuncionarios(rows__funcionarios)
 	fmt.Println(Cedula__funcionarios, Edad__trabajador, Correo__trabajador, Descripcion__trabajador, Apellido__funcionario, FechaDe__nacimiento, Nombre__Funcionarios, Genero__funcionario, Lugar__trabajo)
 	// Ejecucion funcion procesar datos funcionarios
-	funcionesArchivos.ProcesarDatosAniversarios(rows__aniversarios)
+	Informacion__aniversarios := funcionesArchivos.ProcesarDatosAniversarios(rows__aniversarios)
 	// Ejecucion funcion cumpleaños actuales
 	funcionesArreglos.CumpleañosActuales(
 		Nombre__Funcionarios,
@@ -45,6 +45,12 @@ func main() {
 		Nombre__Funcionarios, Apellido__funcionario,
 		Descripcion__trabajador, Genero__funcionario,
 		Edad__trabajador, Correo__trabajador, Informacion__funcionarios)
+
+
+	    funcionesArreglos.NotificarAniversarioFuncionario(Informacion__aniversarios)
+		
+		
+
 	// Ejecucion funcion para poder vigilar cambios archivo excel
 	funcionesArchivos.NotificaCambiosArchivoPrincipal()
 
