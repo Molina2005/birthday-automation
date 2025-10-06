@@ -91,34 +91,52 @@ func ProcesarDatosFuncionarios(rows__funcionarios [][]string) (
 		}
 	}
 	return Cedula__funcionarios, FechaDe__nacimiento,
-		Nombre__funcionarios, Apellido__funcionario, Genero__funcionario, Lugar__trabajo,
-		Edad__trabajador, Correo__trabajador, Descripcion__trabajador, Informacion__funcionarios
+		Nombre__funcionarios, Apellido__funcionario,
+		Genero__funcionario, Lugar__trabajo,
+		Edad__trabajador, Correo__trabajador,
+		Descripcion__trabajador, Informacion__funcionarios
 }
 
-func ProcesarDatosAniversarios(rows__aniversarios [][]string) {
-	cedula__aniversarios := make(map[int64]struct{})
-	fecha__ingreso := make(map[int64]time.Time)
-	nombre__anivesario := make(map[int64]string)
-	años__cumplidos := make(map[int64]string)
+func ProcesarDatosAniversarios(rows__aniversarios [][]string) map[int64]structs.DatosAniversarios {
+	Cedula__aniversarios := make(map[int64]struct{})
+	Fecha__ingreso := make(map[int64]time.Time)
+	Nombre__anivesario := make(map[int64]string)
+	Apellido__aniversarios := make(map[int64]string)
+	Genero__aniversarios := make(map[int64]string)
+	Correo__aniversarios := make(map[int64]string)
+	Descripcion__aniversario := make(map[int64]string)
+	Informacion__aniversarios := make(map[int64]structs.DatosAniversarios)
 
 	for i, rows := range rows__aniversarios {
 		if i > 1 {
 			doc, err := funcionesArreglos.NormalicarCedulas(rows[0])
 			if err != nil {
-				log.Fatal(errors.New("error al normalizar cedula %v: %v"), doc, err)
+				log.Fatalf("error al normalizar cedula %v: %v", doc, err)
 			}
-			cedula__aniversarios[doc] = struct{}{}
+			Cedula__aniversarios[doc] = struct{}{}
 
 			fecha, err := funcionesArreglos.ConvertirFechas(rows[1])
 			if err != nil {
-				log.Fatal(errors.New("error la convertir fecha %v: %v"), fecha, err)
+				log.Fatalf("error la convertir fecha %v: %v", fecha, err)
 			}
-			fecha__ingreso[doc] = fecha
+			Fecha__ingreso[doc] = fecha
+			Nombre__anivesario[doc] = rows[2]
+			Apellido__aniversarios[doc] = rows[3]
+			Genero__aniversarios[doc] = rows[4]
+			Correo__aniversarios[doc] = rows[5]
+			Descripcion__aniversario[doc] = rows[6]
 
-			nombre__anivesario[doc] = rows[2]
-			años__cumplidos[doc] = rows[3]
+			Informacion__aniversarios[doc] = structs.DatosAniversarios{
+				FechaIngreso:       Fecha__ingreso[doc],
+				NombreAniversario:  Nombre__anivesario[doc],
+				ApellidoAniversario: Apellido__aniversarios[doc],
+				GeneroAniversarios: Genero__aniversarios[doc],
+				CorreoAniversario:  Correo__aniversarios[doc],
+				Descripcion:        Descripcion__aniversario[doc],
+			}
 		}
 	}
+	return Informacion__aniversarios
 }
 
 func NotificaCambiosArchivoPrincipal() {
