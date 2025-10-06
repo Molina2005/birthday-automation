@@ -1,0 +1,13 @@
+================================================================================
+Esta condición valida si todavía no ha llegado la fecha exacta del aniversario
+================================================================================
+if fecha__actual.Month() < fecha__ingreso.Month() || 
+fecha__actual.Month() == fecha__ingreso.Month() && fecha__actual.Day() < fecha__ingreso.Day() {
+ años--
+}
+
+*Primero compara si el mes actual es menor que el mes de ingreso.
+*Si eso ocurre, significa que aún no se cumple un año completo, por lo tanto se resta un año.
+
+*En caso de que el mes actual sea igual al mes de ingreso, se revisa además si el día actual es menor que el día de ingreso.
+Si también se cumple, significa que todavía no ha llegado el día exacto del aniversario, así que se resta un año igualmente.
