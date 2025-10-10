@@ -7,6 +7,7 @@ require github.com/xuri/excelize/v2 v2.9.1
 require (
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/go-mail/mail v2.3.1+incompatible // indirect
+	github.com/joho/godotenv v1.5.1 // indirect
 	github.com/kardianos/service v1.2.4 // indirect
 	github.com/richardlehane/mscfb v1.0.4 // indirect
 	github.com/richardlehane/msoleps v1.0.4 // indirect
