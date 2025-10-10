@@ -3,6 +3,7 @@ package funcionesArreglos
 import (
 	"bytes"
 	"fmt"
+	"modulo/config"
 	"modulo/structs"
 	"sort"
 	"strconv"
@@ -123,6 +124,7 @@ func NotificarCumpleañosFuncionario(
 	Correo__trabajador map[int64]string,
 	Informacion__funcionarios map[int64]structs.DatosFuncionarios,
 ) {
+	dataConfig := config.CargaConfig()
 	cumpleaños := CumpleañosActuales(Nombre__funcionarios, Informacion__funcionarios)
 	for _, doc := range cumpleaños {
 		// Variables globales para usar posteriormente
@@ -172,7 +174,7 @@ func NotificarCumpleañosFuncionario(
 		}
 		// cargue de informacion a correos
 		datos__correo := mail.NewMessage()
-		datos__correo.SetHeader("From", "gygculpleanos@gmail.com")
+		datos__correo.SetHeader("From", dataConfig.BaseEmail)
 		datos__correo.SetHeader("To", Correo__trabajador[doc]) // Añadir a Cristian y Deysy como comprobante
 		// Llamado funcion correos sin registrar
 		CorreosSinRegistrar(Informacion__funcionarios)
@@ -180,7 +182,7 @@ func NotificarCumpleañosFuncionario(
 		// Contenido principal del mensaje
 		datos__correo.SetBody("text/html", informacion__plantilla.String())
 		// dialer SMTP configurado para poder enviar correos electronicos
-		datos := mail.NewDialer("smtp.gmail.com", 587, "gygculpleanos@gmail.com", "hzit rqsa dpwd vebc")
+		datos := mail.NewDialer("smtp.gmail.com", 587, dataConfig.BaseEmail, dataConfig.PasswordBaseEmail)
 		// Envio correo con la informacion correspondiente
 		if err := datos.DialAndSend(datos__correo); err != nil {
 			fmt.Printf("error enviando correo:%v", err)
@@ -204,6 +206,7 @@ func AñosEnEmpresa(fecha__ingreso time.Time) int {
 func NotificarAniversarioFuncionario(
 	Informacion__aniversarios map[int64]structs.DatosAniversarios,
 ) {
+	dataConfig := config.CargaConfig()
 	for _, inf := range Informacion__aniversarios {
 		fecha__actual := time.Now()
 
@@ -259,13 +262,13 @@ func NotificarAniversarioFuncionario(
 
 			// cargue de informacion a correos
 			datos__correo := mail.NewMessage()
-			datos__correo.SetHeader("From", "gygculpleanos@gmail.com")
+			datos__correo.SetHeader("From", dataConfig.BaseEmail)
 			datos__correo.SetHeader("To", inf.CorreoAniversario)
-			datos__correo.SetHeader("Subject", "RE: Feliz aniversario"+ " " + inf.NombreAniversario + "" + 
-			inf.ApellidoAniversario)
+			datos__correo.SetHeader("Subject", "RE: Feliz aniversario"+" "+inf.NombreAniversario+""+
+				inf.ApellidoAniversario)
 			datos__correo.SetBody("text/html", informacion__plantilla__aniversarios.String())
 			// dialer SMTP configurado para poder enviar correos electronicos
-			datos := mail.NewDialer("smtp.gmail.com", 587, "gygculpleanos@gmail.com", "hzit rqsa dpwd vebc")
+			datos := mail.NewDialer("smtp.gmail.com", 587, dataConfig.BaseEmail, dataConfig.PasswordBaseEmail)
 			// Envio correo con la informacion correspondiente
 			if err := datos.DialAndSend(datos__correo); err != nil {
 				fmt.Printf("error enviando correo:%v", err)
