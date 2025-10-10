@@ -37,3 +37,8 @@ type DatosAniversarios struct {
 	CorreoAniversario   string
 	Descripcion         string
 }
+
+type Config struct {
+	BaseEmail         string
+	PasswordBaseEmail string
+}
