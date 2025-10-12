@@ -6,9 +6,7 @@ import (
 
 type PlantillaCumpleanos struct {
 	Titulo       string
-	Fecha        int
 	Nombre       string
-	Apellido     string
 	Descripcion  string
 	Edad         int
 	Funcionarios []string
@@ -42,3 +40,4 @@ type Config struct {
 	BaseEmail         string
 	PasswordBaseEmail string
 }
+
