@@ -46,19 +46,9 @@ func CumpleañosActuales(
 	return cumpleaños
 }
 
-func CorreosSinRegistrar(
-	Informacion__funcionarios map[int64]structs.DatosFuncionarios) error {
-	for _, inf := range Informacion__funcionarios {
-		if strings.TrimSpace(inf.CorreoFuncionario) == "" {
-			fmt.Printf("funcionari@ %v %v sin correo electronico\n", inf.NombreFuncionario, inf.ApellidoFuncionario)
-			continue
-		}
-	}
-	return nil
-}
-
 func EnviarCalendarioCumpleañosMes(
 	Informacion__funcionarios map[int64]structs.DatosFuncionarios) {
+	dataConfig := config.CargaConfig()
 	var Meses__año = map[time.Month]string{
 		time.January: "enero", time.February: "febrero",
 		time.March: "marzo", time.April: "abril",
@@ -108,7 +98,7 @@ func EnviarCalendarioCumpleañosMes(
 	datos__correo.SetHeader("To", "cm1094871@gmail.com")
 	datos__correo.SetHeader("Subject", "Calendario cumpleaños"+" "+mes__titulo)
 	datos__correo.SetBody("text/html", informacion__plantilla.String())
-	datos := mail.NewDialer("smtp.gmail.com", 587, "gygculpleanos@gmail.com", "hzit rqsa dpwd vebc")
+	datos := mail.NewDialer("smtp.gmail.com", 587, dataConfig.BaseEmail, dataConfig.PasswordBaseEmail)
 	if err := datos.DialAndSend(datos__correo); err != nil {
 		fmt.Printf("error enviando correo: %v", err)
 	} else {
@@ -139,27 +129,21 @@ func NotificarCumpleañosFuncionario(
 			if tmlp, err = template.ParseGlob("plantillasHombre/*.html"); err != nil {
 				fmt.Printf("error al analizar archivos")
 			}
-			// Se obtienen todas las plantillas dentro del archivo
-			for _, savePlantillas := range tmlp.Templates() {
-				savePlantillas.Name()
-				ListaPlantillas = append(ListaPlantillas, savePlantillas)
-			}
-			// plantilla aleatorias
-			indice := rand.Intn(len(ListaPlantillas))
-			plantillaElegida = ListaPlantillas[indice]
 		case "FEMENINO":
 			if tmlp, err = template.ParseGlob("plantillasMujer/*.html"); err != nil {
 				fmt.Printf("error al analizar archivos")
 			}
-			// Se obtienen todas las plantillas dentro del archivo
-			for _, savePlantillas := range tmlp.Templates() {
-				savePlantillas.Name()
-				ListaPlantillas = append(ListaPlantillas, savePlantillas)
-			}
-			// plantilla aleatorias
-			indice := rand.Intn(len(ListaPlantillas))
-			plantillaElegida = ListaPlantillas[indice]
 		}
+
+		// Se obtienen todas las plantillas dentro del archivo
+		for _, savePlantillas := range tmlp.Templates() {
+			savePlantillas.Name()
+			ListaPlantillas = append(ListaPlantillas, savePlantillas)
+		}
+		// plantilla aleatorias
+		indice := rand.Intn(len(ListaPlantillas))
+		plantillaElegida = ListaPlantillas[indice]
+
 		// datos a enviar a plantilla
 		info__funcionario := structs.PlantillaCumpleanos{
 			Titulo:      "Feliz cumpleaños",
@@ -176,8 +160,6 @@ func NotificarCumpleañosFuncionario(
 		datos__correo := mail.NewMessage()
 		datos__correo.SetHeader("From", dataConfig.BaseEmail)
 		datos__correo.SetHeader("To", Correo__trabajador[doc]) // Añadir a Cristian y Deysy como comprobante
-		// Llamado funcion correos sin registrar
-		CorreosSinRegistrar(Informacion__funcionarios)
 		datos__correo.SetHeader("Subject", "RE: Feliz cumpleaños"+" "+Nombre__funcionarios[doc])
 		// Contenido principal del mensaje
 		datos__correo.SetBody("text/html", informacion__plantilla.String())
@@ -208,7 +190,8 @@ func NotificarAniversarioFuncionario(
 ) {
 	dataConfig := config.CargaConfig()
 	for _, inf := range Informacion__aniversarios {
-		fecha__actual := time.Now()
+		loc, _ := time.LoadLocation("America/Bogota")
+		fecha__actual := time.Now().In(loc)
 
 		if fecha__actual.Month() == inf.FechaIngreso.Month() &&
 			fecha__actual.Day() == inf.FechaIngreso.Day() {
@@ -225,27 +208,20 @@ func NotificarAniversarioFuncionario(
 				if tmlpAniversarios, err = template.ParseGlob("plantillasHombreAniversarios/*.html"); err != nil {
 					fmt.Printf("error al analizar archivos")
 				}
-				// Se obtienen todas las plantillas dentro del archivo
-				for _, savePlantillas := range tmlpAniversarios.Templates() {
-					savePlantillas.Name()
-					ListaPlantillasAniverarios = append(ListaPlantillasAniverarios, savePlantillas)
-				}
-				// plantilla aleatorias
-				indice := rand.Intn(len(ListaPlantillasAniverarios))
-				plantillaElegidaAniversarios = ListaPlantillasAniverarios[indice]
 			case "FEMENINO":
 				if tmlpAniversarios, err = template.ParseGlob("plantillasMujerAniversarios/*.html"); err != nil {
 					fmt.Printf("error al analizar archivos")
 				}
-				// Se obtienen todas las plantillas dentro del archivo
-				for _, savePlantillas := range tmlpAniversarios.Templates() {
-					savePlantillas.Name()
-					ListaPlantillasAniverarios = append(ListaPlantillasAniverarios, savePlantillas)
-				}
-				// plantilla aleatorias
-				indice := rand.Intn(len(ListaPlantillasAniverarios))
-				plantillaElegidaAniversarios = ListaPlantillasAniverarios[indice]
 			}
+			// Se obtienen todas las plantillas dentro del archivo
+			for _, savePlantillas := range tmlpAniversarios.Templates() {
+				savePlantillas.Name()
+				ListaPlantillasAniverarios = append(ListaPlantillasAniverarios, savePlantillas)
+			}
+			// plantilla aleatorias
+			indice := rand.Intn(len(ListaPlantillasAniverarios))
+			plantillaElegidaAniversarios = ListaPlantillasAniverarios[indice]
+
 			// datos a enviar a plantilla
 			info__aniversario := structs.PlantillaAniversarios{
 				Titulo:      "Feliz aniversario",
