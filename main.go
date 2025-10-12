@@ -46,10 +46,9 @@ func main() {
 		Descripcion__trabajador, Genero__funcionario,
 		Edad__trabajador, Correo__trabajador, Informacion__funcionarios)
 
-
-	    funcionesArreglos.NotificarAniversarioFuncionario(Informacion__aniversarios)
-		
-		
+	horario__establecido.AddFunc("", func() {
+		funcionesArreglos.NotificarAniversarioFuncionario(Informacion__aniversarios)
+	})
 
 	// Ejecucion funcion para poder vigilar cambios archivo excel
 	funcionesArchivos.NotificaCambiosArchivoPrincipal()
