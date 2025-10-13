@@ -2,53 +2,135 @@
 <html lang="es">
   <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cumpleaños</title>
   </head>
-  <body style="margin:0; padding:0; font-family: Arial, sans-serif; background-color:#e8f0fe;">
-    <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center">
+  <body style="margin:0; padding:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #0f2027 0%, #203a43 50%, #2c5364 100%);">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="padding:40px 0;">
       <tr>
         <td align="center">
-
-          <!-- Tarjeta -->
-          <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff; border-radius:15px; overflow:hidden; border:2px solid #1e3a8a;">
-            
-            <!-- Encabezado -->
+          <!-- Contenedor Principal -->
+          <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff; border-radius:20px; overflow:hidden; box-shadow: 0 25px 70px rgba(0,0,0,0.5); border: 3px solid #1a4d6d;">
+            <!-- Encabezado con Logo y Detalles -->
             <tr>
-              <td align="center" style="background-color:#1e3a8a; padding:25px;">
-                <h1 style="margin:0; font-size:26px; color:#ffffff; font-weight:bold;">
+              <td align="center" style="padding:50px 30px 20px 30px; background: linear-gradient(180deg, #f8f9fa 0%, #ffffff 100%); position:relative;">
+                
+                <h1 style="margin:0; font-size:32px; color:#1a4d6d; font-weight:800; letter-spacing:-0.5px; text-transform:uppercase; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
                   {{.Titulo}}
                 </h1>
+                
+                <!-- Línea Dorada Decorativa -->
+                <div style="width:120px; height:3px; background: linear-gradient(90deg, transparent, #d4af37, transparent); margin:15px auto 0 auto;"></div>
               </td>
             </tr>
 
-            <!-- Contenido -->
+            <!-- Contenido Principal -->
             <tr>
-              <td align="center" style="padding:30px; color:#333333;">
-                <h2 style="color:#1e3a8a; margin:0; font-size:22px; font-weight:bold;">
-                  🎉 ¡Feliz Cumpleaños {{.Nombre}} ! 🎂
-                </h2>
-                <p style="font-size:16px; line-height:24px; color:#444; margin:20px 0;">
-                  {{.Descripcion}}
-                </p>
-                <p style="background-color:#1e3a8a; color:#ffffff; padding:12px 25px; border-radius:25px; display:inline-block; font-weight:bold; font-size:16px; margin:15px 0;">
-                  🎈 {{.Edad}} años 🎈
-                </p>
+              <td align="center" style="padding:0 40px 35px 40px;">
+                
+                <!-- Tarjeta de Cumpleaños con Borde Dorado -->
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: linear-gradient(135deg, #e8f0f5 0%, #d6e4ec 100%); border-radius:15px; padding:35px; margin-bottom:30px; border: 2px solid #d4af37; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+                  <tr>
+                    <td align="center">
+                      
+                      <!-- Globos Decorativos Internos -->
+                      <div style="font-size:35px; margin-bottom:15px; letter-spacing:20px;">
+                        🎈🎊🎈
+                      </div>
+
+                      <h2 style="color:#1a4d6d; margin:0 0 20px 0; font-size:28px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">
+                        ¡Feliz Cumpleaños {{.Nombre}}!
+                      </h2>
+                      
+                      <p style="font-size:17px; line-height:28px; color:#2d3e50; margin:0; text-align:center; font-weight:500;">
+                        {{.Descripcion}}
+                      </p>
+
+                      <!-- Estrellas Decorativas -->
+                      <div style="font-size:22px; margin-top:15px; letter-spacing:15px;">
+                        ⭐✨⭐✨⭐
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Badge de Edad con Diseño Masculino -->
+                <table border="0" cellspacing="0" cellpadding="0" style="margin:0 auto 25px auto;">
+                  <tr>
+                    <td style="background: linear-gradient(135deg, #1a4d6d 0%, #2c5f7d 100%); color:#ffffff; padding:18px 45px; border-radius:50px; font-weight:800; font-size:22px; box-shadow: 0 10px 30px rgba(26, 77, 109, 0.4); border: 3px solid #d4af37; text-transform:uppercase; letter-spacing:1px;">
+                      🏆 {{.Edad}} AÑOS 🏆
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Decoración de Elementos Celebratorios -->
+                <div style="margin-top:20px; font-size:38px; letter-spacing:25px; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">
+                  🎯🎁🍾🎊
+                </div>
+
               </td>
             </tr>
 
-            <!-- Pie -->
+            <!-- Separador con Estilo -->
             <tr>
-              <td align="center" style="background-color:#1e3a8a; padding:18px; color:#ffffff; font-size:14px;">
-                🤝 Con aprecio, tu equipo corporativo <b>Sistemas GyG</b>
+              <td style="padding:0 40px;">
+                <div style="border-top:3px solid #d4af37; margin:20px 0; opacity:0.5;"></div>
               </td>
             </tr>
 
+            <!-- Mensaje Final con Bandera de Poñlantillas -->
+            <tr>
+              <td align="center" style="padding:25px 40px 35px 40px;">
+                
+                <!-- Bandera Decorativa -->
+                <div style="display:inline-block; padding:12px 30px; background: linear-gradient(135deg, #1a4d6d 0%, #2c5f7d 100%); border-radius:25px; margin-bottom:20px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border: 2px solid #d4af37;">
+                  <span style="color:#ffffff; font-size:15px; font-weight:700; letter-spacing:1px;">🎊 CELEBRACIÓN ESPECIAL 🎊</span>
+                </div>
+
+                <p style="font-size:16px; color:#2d3e50; margin:0; line-height:24px; font-weight:500;">
+                  Que este nuevo año de vida esté lleno de logros,<br>
+                  <strong style="color:#1a4d6d;">éxitos profesionales</strong> y momentos extraordinarios.
+                </p>
+              </td>
+            </tr>
+
+            <!-- Pie de Página Profesional -->
+            <tr>
+              <td align="center" style="background: linear-gradient(135deg, #0f2027 0%, #1a4d6d 100%); padding:30px;">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td align="center">
+                      
+                      <!-- Icono Corporativo -->
+                      <div style="font-size:30px; margin-bottom:12px;">🤝</div>
+                      
+                      <p style="margin:0; color:#ffffff; font-size:16px; font-weight:700; letter-spacing:0.5px;">
+                        Con aprecio, tu equipo
+                      </p>
+                      <div style="margin:12px 0;">
+                        <span style="color:#d4af37; font-size:20px; font-weight:800; letter-spacing:1px; text-transform:uppercase;">Sistemas GyG</span>
+                      </div>
+                      <p style="margin:8px 0 0 0; color:#8b9fb0; font-size:13px; font-style:italic;">
+                        Excelencia • Profesionalismo • Compromiso
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Decoración Inferior Dorada -->
+            <tr>
+              <td style="background: linear-gradient(90deg, #d4af37 0%, #f4d03f 50%, #d4af37 100%); padding:0; height:8px;"></td>
+            </tr>
           </table>
-          <!-- Fin Tarjeta -->
+          <table width="600" border="0" cellspacing="0" cellpadding="0" style="margin-top:25px;">
+            <tr>
+            </tr>
+          </table>
 
         </td>
       </tr>
     </table>
   </body>
 </html>
-
