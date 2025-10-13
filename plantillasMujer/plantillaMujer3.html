@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cumpleaños</title>
+  </head>
+  <body style="margin:0; padding:0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg, #b91c8c 0%, #c026d3 50%, #d946ef 100%);">
+    <table width="100%" border="0" cellspacing="0" cellpadding="0" align="center" style="padding:40px 0;">
+      <tr>
+        <td align="center">
+          <!-- Contenedor Principal -->
+          <table width="600" border="0" cellspacing="0" cellpadding="0" style="background-color:#ffffff; border-radius:20px; overflow:hidden; box-shadow: 0 25px 70px rgba(0,0,0,0.5); border: 3px solid #e879f9;">
+            
+            <!-- Encabezado con Logo y Detalles -->
+            <tr>
+              <td align="center" style="padding:50px 30px 20px 30px; background: linear-gradient(180deg, #fdf4ff 0%, #ffffff 100%); position:relative;">
+                
+                <!-- Decoración Floral -->
+                <div style="position:absolute; top:20px; left:30px; font-size:24px; opacity:0.6;">🌺</div>
+                <div style="position:absolute; top:30px; right:40px; font-size:20px; opacity:0.6;">💗</div>
+                <div style="position:absolute; bottom:20px; left:50px; font-size:18px; opacity:0.5;">🌸</div>
+                <div style="position:absolute; bottom:25px; right:60px; font-size:22px; opacity:0.5;">✨</div>
+                
+                <h1 style="margin:0; font-size:32px; color:#c026d3; font-weight:800; letter-spacing:-0.5px; text-transform:uppercase; text-shadow: 1px 1px 2px rgba(0,0,0,0.1);">
+                  {{.Titulo}}
+                </h1>
+                
+                <!-- Línea Decorativa -->
+                <div style="width:120px; height:3px; background: linear-gradient(90deg, transparent, #e879f9, transparent); margin:15px auto 0 auto;"></div>
+              </td>
+            </tr>
+
+            <!-- Contenido Principal -->
+            <tr>
+              <td align="center" style="padding:0 40px 35px 40px;">
+                
+                <!-- Tarjeta de Cumpleaños -->
+                <table width="100%" border="0" cellspacing="0" cellpadding="0" style="background: linear-gradient(135deg, #fae8ff 0%, #f5d0fe 100%); border-radius:15px; padding:35px; margin-bottom:30px; border: 2px solid #e879f9; box-shadow: 0 8px 20px rgba(0,0,0,0.1);">
+                  <tr>
+                    <td align="center">
+                      
+                      <!-- Decoración Interna Femenina -->
+                      <div style="font-size:35px; margin-bottom:15px; letter-spacing:20px;">
+                        💗🌷💗
+                      </div>
+
+                      <h2 style="color:#c026d3; margin:0 0 20px 0; font-size:28px; font-weight:800; text-transform:uppercase; letter-spacing:0.5px;">
+                        ¡Feliz Cumpleaños {{.Nombre}}!
+                      </h2>
+                      
+                      <p style="font-size:17px; line-height:28px; color:#a21caf; margin:0; text-align:center; font-weight:500;">
+                        {{.Descripcion}}
+                      </p>
+
+                      <!-- Decoración con Corazones y Estrellas -->
+                      <div style="font-size:22px; margin-top:15px; letter-spacing:15px;">
+                        ✨💗✨💗✨
+                      </div>
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Badge de Edad Femenino -->
+                <table border="0" cellspacing="0" cellpadding="0" style="margin:0 auto 25px auto;">
+                  <tr>
+                    <td style="background: linear-gradient(135deg, #d946ef 0%, #e879f9 100%); color:#ffffff; padding:18px 45px; border-radius:50px; font-weight:800; font-size:22px; box-shadow: 0 10px 30px rgba(232, 121, 249, 0.4); border: 3px solid #fbbf24; text-transform:uppercase; letter-spacing:1px;">
+                      👑 {{.Edad}} AÑOS 👑
+                    </td>
+                  </tr>
+                </table>
+
+                <!-- Decoración de Elementos Celebratorios Femeninos -->
+                <div style="margin-top:20px; font-size:38px; letter-spacing:25px; text-shadow: 2px 2px 4px rgba(0,0,0,0.1);">
+                  🎀🎁🌷🎊
+                </div>
+
+              </td>
+            </tr>
+
+            <!-- Separador con Estilo -->
+            <tr>
+              <td style="padding:0 40px;">
+                <div style="border-top:3px solid #e879f9; margin:20px 0; opacity:0.5;"></div>
+              </td>
+            </tr>
+
+            <!-- Mensaje Final -->
+            <tr>
+              <td align="center" style="padding:25px 40px 35px 40px;">
+                
+                <!-- Bandera Decorativa Femenina -->
+                <div style="display:inline-block; padding:12px 30px; background: linear-gradient(135deg, #d946ef 0%, #e879f9 100%); border-radius:25px; margin-bottom:20px; box-shadow: 0 5px 15px rgba(0,0,0,0.2); border: 2px solid #fbbf24;">
+                  <span style="color:#ffffff; font-size:15px; font-weight:700; letter-spacing:1px;">💗 CELEBRACIÓN ESPECIAL 💗</span>
+                </div>
+
+                <p style="font-size:16px; color:#a21caf; margin:0; line-height:24px; font-weight:500;">
+                  Que este nuevo año de vida esté lleno de logros,<br>
+                  <strong style="color:#c026d3;">éxitos profesionales</strong> y momentos extraordinarios.
+                </p>
+              </td>
+            </tr>
+
+            <!-- Pie de Página Profesional -->
+            <tr>
+              <td align="center" style="background: linear-gradient(135deg, #b91c8c 0%, #a21caf 100%); padding:30px;">
+                <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                  <tr>
+                    <td align="center">
+                      
+                      <!-- Icono Corporativo -->
+                      <div style="font-size:30px; margin-bottom:12px;">🤝</div>
+                      
+                      <p style="margin:0; color:#ffffff; font-size:16px; font-weight:700; letter-spacing:0.5px;">
+                        Con aprecio, tu equipo
+                      </p>
+                      <div style="margin:12px 0;">
+                        <span style="color:#e879f9; font-size:20px; font-weight:800; letter-spacing:1px; text-transform:uppercase;">Sistemas GyG</span>
+                      </div>
+                      <p style="margin:8px 0 0 0; color:#f0abfc; font-size:13px; font-style:italic;">
+                        Excelencia • Profesionalismo • Compromiso
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
+
+            <!-- Decoración Inferior -->
+            <tr>
+              <td style="background: linear-gradient(90deg, #e879f9 0%, #f0abfc 50%, #e879f9 100%); padding:0; height:8px;"></td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+  </body>
+</html>
