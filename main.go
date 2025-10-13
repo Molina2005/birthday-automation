@@ -40,15 +40,18 @@ func main() {
 		informacion := Informacion__funcionarios
 		funcionesArreglos.EnviarCalendarioCumpleañosMes(informacion)
 	})
-	horario__establecido.Start()
-	funcionesArreglos.NotificarCumpleañosFuncionario(
-		Nombre__Funcionarios, Apellido__funcionario,
-		Descripcion__trabajador, Genero__funcionario,
-		Edad__trabajador, Correo__trabajador, Informacion__funcionarios)
-
-	horario__establecido.AddFunc("", func() {
+	// Ejecucion funcion cumpleaños individuales de funcionarios
+	horario__establecido.AddFunc("0 8 * * *", func() {
+		funcionesArreglos.NotificarCumpleañosFuncionario(
+			Nombre__Funcionarios, Apellido__funcionario,
+			Descripcion__trabajador, Genero__funcionario,
+			Edad__trabajador, Correo__trabajador, Informacion__funcionarios)
+	})
+	// Ejecucion funcion aniversarios funcionarios
+	horario__establecido.AddFunc("0 8 * * *", func() {
 		funcionesArreglos.NotificarAniversarioFuncionario(Informacion__aniversarios)
 	})
+	horario__establecido.Start()
 
 	// Ejecucion funcion para poder vigilar cambios archivo excel
 	funcionesArchivos.NotificaCambiosArchivoPrincipal()
